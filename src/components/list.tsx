@@ -33,7 +33,7 @@ export const List = () => {
           <img src={cardImg} alt="card" className="w-[108px] h-[118px] object-cover rounded-xl" />
           <div className="ml-[18px]  w-full flex flex-col">
             <div className="grow">
-              <h4 className="text-[16px] font-medium capitalize break-words mb-2">{card.name}</h4>
+              <h4 className="text-[16px] font-medium capitalize break-words mb-2 max-w-[140px]">{card.name}</h4>
               <span className="text-[#FFE881] text-xs capitalize mb-2">lvl {card.lvl}</span>
             </div>
             <div className="mt-2 border-t-[1px]  border-primary flex justify-between items-center">
