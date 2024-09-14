@@ -1,0 +1,33 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: "Inter", sans-serif;
+  @apply bg-white text-white;
+}
+
+@layer components {
+  .card-approved::after {
+    content: "";
+    background-image: url("./assets/Subtract.svg");
+    width: 20px;
+    height: 20px;
+    background-size: contain;
+    display: block;
+    position: absolute;
+    top: 6px;
+    right: 6px;
+  }
+  .card-new::after {
+    content: "New";
+    color: #7b66f2;
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    font-weight: 600;
+    font-size: 12px;
+  }
+}
