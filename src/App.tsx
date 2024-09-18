@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Menu, Coins } from "./components";
 import { List } from "./components/list";
 import { cn } from "./utils/cn";
+import { CardDetailsModal } from "./components/CardDetailsModal";
+import { CardType } from "./types/card";
 
 const tabs: { value: string; label: string }[] = [
   // { value: "all", label: "Все" },
@@ -10,8 +12,71 @@ const tabs: { value: string; label: string }[] = [
   // { value: "popular", label: "Популярные" },
 ];
 
+const cards: CardType[] = [
+  {
+    name: "Сoffee break master",
+    lvl: 3,
+    coins: 19,
+    coinsInHour: 199,
+    description: "Описание карточки 1",
+    variant: "default",
+  },
+  {
+    name: "Сoffee break master",
+    lvl: 3,
+    coins: 19,
+    coinsInHour: 199,
+    description: "Описание карточки 2",
+    variant: "new",
+  },
+  {
+    name: "Сoffee break master",
+    lvl: 3,
+    coins: 19,
+    coinsInHour: 199,
+    description: "Описание карточки 3",
+    variant: "approved",
+  },
+  {
+    name: "Сoffee break master",
+    lvl: 3,
+    coins: 19,
+    coinsInHour: 199,
+    description: "Описание карточки 4",
+    variant: "default",
+  },
+  {
+    name: "Сoffee break master",
+    lvl: 3,
+    coins: 19,
+    coinsInHour: 199,
+    description: "Описание карточки 5",
+    variant: "new",
+  },
+  {
+    name: "Сoffee break master",
+    lvl: 3,
+    coins: 19,
+    coinsInHour: 199,
+    description: "Описание карточки 6",
+    variant: "new",
+  },
+];
+
 function App() {
   const [activeTab, setActiveTab] = useState(tabs[0]);
+  const [showShare, setShowShare] = useState(false);
+
+  const [selectedCard, setSelectedCard] = useState<CardType>(cards[0]);
+
+  const handleShareCard = (card: CardType) => {
+    setSelectedCard(card);
+    setShowShare(true);
+  };
+
+  const handleClearAndCloseModal = () => {
+    setShowShare(false);
+  };
 
   return (
     <div className="max-w-phone mx-auto bg-gradient-primary h-full p-[30px] mb-[92px]">
@@ -29,8 +94,9 @@ function App() {
           </span>
         ))}
       </div>
-      <List />
+      <List onSelectCard={handleShareCard} cards={cards} />
       <Menu />
+      <CardDetailsModal card={selectedCard} onClose={handleClearAndCloseModal} isView={showShare} />
     </div>
   );
 }

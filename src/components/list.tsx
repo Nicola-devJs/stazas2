@@ -1,40 +1,17 @@
-import React, { useState } from "react";
+import React from "react";
 import cardImg from "../assets/card.png";
 import coinIcon from "../assets/Coin.svg";
 import { cn } from "../utils/cn";
-import { CardDetailsModal } from "./CardDetailsModal"; // Новый компонент
+import { CardType } from "../types/card";
 
-type CardType = {
-  name: string;
-  lvl: number;
-  coins: number;
-  coinsInHour: number;
-  description: string; // добавляем описание
-  variant: "default" | "new" | "approved";
-};
+interface IProps {
+  onSelectCard: (card: CardType) => void;
+  cards: CardType[];
+}
 
-const cards: CardType[] = [
-  { name: "Сoffee break master", lvl: 3, coins: 19, coinsInHour: 199, description: "Описание карточки 1", variant: "default" },
-  { name: "Сoffee break master", lvl: 3, coins: 19, coinsInHour: 199, description: "Описание карточки 2", variant: "new" },
-  { name: "Сoffee break master", lvl: 3, coins: 19, coinsInHour: 199, description: "Описание карточки 3", variant: "approved" },
-  { name: "Сoffee break master", lvl: 3, coins: 19, coinsInHour: 199, description: "Описание карточки 4", variant: "default" },
-  { name: "Сoffee break master", lvl: 3, coins: 19, coinsInHour: 199, description: "Описание карточки 5", variant: "new" },
-  { name: "Сoffee break master", lvl: 3, coins: 19, coinsInHour: 199, description: "Описание карточки 6", variant: "new" },
-];
-
-export const List = () => {
-  const [selectedCard, setSelectedCard] = useState<CardType | null>(null);
-
-  const handleCardClick = (card: CardType) => {
-    setSelectedCard(card);
-  };
-
-  const handleCloseModal = () => {
-    setSelectedCard(null);
-  };
-
+export const List = ({ onSelectCard, cards }: IProps) => {
   return (
-    <div className="mt-5 grid grid-cols-1 gap-2 perspective relative">
+    <div className="mt-5 grid grid-cols-1 gap-2">
       {cards.map((card) => (
         <div
           key={card.name}
@@ -45,7 +22,7 @@ export const List = () => {
               "card-new": card.variant === "new",
             }
           )}
-          onClick={() => handleCardClick(card)}
+          onClick={() => onSelectCard(card)}
         >
           <img src={cardImg} alt="card" className="w-[108px] h-[118px] object-cover rounded-xl" />
           <div className="ml-[18px] w-full flex flex-col">
@@ -69,10 +46,6 @@ export const List = () => {
           </div>
         </div>
       ))}
-      {selectedCard && <CardDetailsModal card={selectedCard} onClose={handleCloseModal} />}
     </div>
   );
 };
-
-
-
