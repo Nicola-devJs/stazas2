@@ -30,4 +30,11 @@ body {
     font-weight: 600;
     font-size: 12px;
   }
+
+  .card-border {
+    border-width: 1px;
+    border-color: #008f6d;
+    border-bottom: 0;
+    /* border-image: linear-gradient(180deg, #306151, #031e2b) 1; */
+  }
 }
